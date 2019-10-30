@@ -27,7 +27,8 @@ var Item = new ItemSchema(
     { data: Buffer, contentType: String }
 }
 );
-var Item = mongoose.model('Clothes',ItemSchema);
+var plateItem = mongoose.model('Plates',ItemSchema);
+var faceItem = mongoose.model('Faces',ItemSchema);
 
 // Expecting data in body.
 app.post("/accounts", jsonParser, (req, res) => {
@@ -44,6 +45,11 @@ app.post("/accounts", jsonParser, (req, res) => {
     });
 
     if (validObject) {
+        var newItem = new Item();
+        newItem.img.data = fs.readFileSync(req.files.userPhoto.path)
+        newItem.img.contentType = 'image/png';
+        newItem.save();
+
         insertAccount(validObject);
         res.status(201).json(jsonObject);
     } else {
@@ -100,3 +106,9 @@ app.listen("8080", () => {
 
     mongoose.connect(url);
 });
+
+app.use(multer({ dest: './uploads/',
+    rename: function (fieldname, filename) {
+        return filename;
+    },
+}));
