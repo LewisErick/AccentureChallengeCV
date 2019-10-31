@@ -83,7 +83,7 @@ def get_objects(img, config="yolov3-tiny.cfg",
         h = box[3]
         objects.append(
             (str(classes[class_ids[i]]),
-            image[round(x):round(x+w), round(y):round(y+h)])
+            image[round(y):round(y+h), round(x):round(x+w)])
         )
 
     return objects
