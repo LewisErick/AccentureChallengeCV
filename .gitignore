@@ -6,3 +6,4 @@ roi/training
 *.weights
 roi/.ipynb_checkpoints/Plates ROI-checkpoint.ipynb
 roi/__pycache__/
+*.png
