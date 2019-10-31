@@ -110,7 +110,8 @@ def draw_prediction(img, class_id, confidence, x, y, x_plus_w, y_plus_h):
 
 def get_objects_video(vid, config="yolov3-tiny.cfg",
                 weights="yolov3-tiny.weights",
-                classes_="yolov3.txt"):
+                classes_="yolov3.txt",
+                sample_rate=1):
 
     cam = cv2.VideoCapture(vid)
 
@@ -118,11 +119,13 @@ def get_objects_video(vid, config="yolov3-tiny.cfg",
 
     frame_index = 0
     
-    print("Processing")
     while(True): 
+        ret = None
+        frame = None
         # reading from frame 
-        #for _ in range(5):
-        ret,frame = cam.read() 
+        if sample_rate > 1:
+            for _ in range(sample_rate):
+                ret,frame = cam.read()
     
         if ret:
             image = frame
@@ -186,8 +189,6 @@ def get_objects_video(vid, config="yolov3-tiny.cfg",
                 )
         else:
             break
-        
-        print("Frame", frame_index)
         frame_index = frame_index + 1
         frames.append(objects)
     return frames
