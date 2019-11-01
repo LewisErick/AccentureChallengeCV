@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from yolo_opencv import get_objects_demo
 from plates_roi import get_license_plates_demo
+from ocr import extract_plate_text
 import os
 
 def get_frame_objects(video_filename, sample_rate=1):
@@ -48,10 +49,17 @@ def get_frame_objects_demo(video_filename, sample_rate=1):
 
             new_car = None
             if obj_img is not None and len(obj_img) > 0:
-                car_plates = get_license_plates_demo(obj_img)
-                if len(car_plates) > 0:
-                    new_car = cv2.resize(car_plates[0],(500,300))
-                    out2.write(new_car)
+                try:
+                    car_plates = get_license_plates_demo(obj_img)
+                    if len(car_plates) > 0:
+                        new_car = cv2.resize(car_plates[0],(500,300))
+                        txt, plate_img = extract_plate_text(new_car)
+                        if len(txt) > 0:
+                            print(txt)
+                            plate_img = cv2.resize(plate_img,(500,300))
+                            out2.write(plate_img)
+                except cv2.error as e:
+                    print("cv2 error")
             out.write(new_frame)
     
     cam.release()

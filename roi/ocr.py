@@ -16,9 +16,9 @@ def rotateImage(img):
     return img
 
 def adaptiveThreshold(img):
-    gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+    #gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 
-    threshGauss = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 31, 7)
+    threshGauss = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 31, 7)
 
     return threshGauss
 
@@ -78,10 +78,7 @@ def extract_plate_text(img):
     img = resize(img)
     img = addBorder(img)
 
-    cv2.imwrite("test.jpg", img)
+    #cv2.imwrite("test.jpg", img)
 
     text = cleanOCR(img)
     return text, img
-
-img = cv2.imread("plates/plate_faces_26_ 0_1_.png")
-print(extract_plate_text(img))

@@ -17,11 +17,12 @@ def apply_threshold_to_img(img, threshold_type="binary"):
 def get_license_plates(filename):
     plates = []
     image = cv2.imread("raw_plates/" + filename)
-    if image is not None:    
+    if image is not None and np.shape(image) != ():
         gray = image
 
         aspect_ratio = 1
         new_size = 800
+        cv2.imwrite("test.jpg", gray)
         gray = cv2.cvtColor(cv2.resize(gray, (int(new_size * aspect_ratio), int(new_size * (1/aspect_ratio)))),
                                        cv2.COLOR_BGR2GRAY) #convert to grey scale
         gray = gray[int(gray.shape[1]/2):, :]
