@@ -4,27 +4,6 @@ import numpy as np
 def get_objects(img, config="yolov3-tiny.cfg",
                 weights="yolov3-tiny.weights",
                 classes_="yolov3.txt"):
-   
-    def get_output_layers(net):
-        
-        layer_names = net.getLayerNames()
-        
-        output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
-
-        return output_layers
-
-
-    def draw_prediction(img, class_id, confidence, x, y, x_plus_w, y_plus_h):
-
-        label = str(classes[class_id])
-
-        color = COLORS[class_id]
-
-        cv2.rectangle(img, (x,y), (x_plus_w,y_plus_h), color, 2)
-
-        cv2.putText(img, label, (x-10,y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
-
-        
     image = cv2.imread(img)
 
     Width = image.shape[1]
@@ -108,10 +87,9 @@ def draw_prediction(img, class_id, confidence, x, y, x_plus_w, y_plus_h):
 
     cv2.putText(img, label, (x-10,y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
 
-def get_objects_video(vid, config="yolov3-tiny.cfg",
+def get_objects_video(vid, sample_rate=1, config="yolov3-tiny.cfg",
                 weights="yolov3-tiny.weights",
-                classes_="yolov3.txt",
-                sample_rate=1):
+                classes_="yolov3.txt"):
 
     cam = cv2.VideoCapture(vid)
 
@@ -126,6 +104,8 @@ def get_objects_video(vid, config="yolov3-tiny.cfg",
         if sample_rate > 1:
             for _ in range(sample_rate):
                 ret,frame = cam.read()
+        else:
+            ret,frame = cam.read()
     
         if ret:
             image = frame
@@ -139,7 +119,6 @@ def get_objects_video(vid, config="yolov3-tiny.cfg",
                 classes = [line.strip() for line in f.readlines()]
 
             COLORS = np.random.uniform(0, 255, size=(len(classes), 3))
-
             net = cv2.dnn.readNet(weights, config)
 
             blob = cv2.dnn.blobFromImage(image, scale, (416,416), (0,0,0), True, crop=False)
@@ -190,5 +169,6 @@ def get_objects_video(vid, config="yolov3-tiny.cfg",
         else:
             break
         frame_index = frame_index + 1
-        frames.append(objects)
+        if len(objects) > 0:
+            frames.append(objects)
     return frames
