@@ -1,3 +1,16 @@
 data/
 node_modules/
+roi/raw_video
 .DS_Store
+*.ipynb_checkpoints*
+roi/training
+*.pyc
+*.txt
+*.jpg
+*.cfg
+*.weights
+roi/.ipynb_checkpoints/Plates ROI-checkpoint.ipynb
+roi/__pycache__/
+*.png
+*.jpg
+roi/*.jpg
