@@ -1,7 +1,12 @@
-*.jpg
-*.png
-*.cfg
-*.weights
+roi/raw_video
 .DS_Store
 *.ipynb_checkpoints*
 roi/training
+*.jpg
+*.cfg
+*.weights
+roi/.ipynb_checkpoints/Plates ROI-checkpoint.ipynb
+roi/__pycache__/
+*.png
+*.jpg
+roi/*.jpg
