@@ -1,7 +1,11 @@
+data/
+node_modules/
 roi/raw_video
 .DS_Store
 *.ipynb_checkpoints*
 roi/training
+*.pyc
+*.txt
 *.jpg
 *.cfg
 *.weights
