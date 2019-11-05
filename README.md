@@ -1,7 +1,7 @@
 # AccentureChallengeCV
 Recognition and validation of license plates and face of owners of a car with a subscription or membership to a parking lot.
 
-# # #Contributors
+### Contributors
 - Luis Erick Zul Rabasa A00818663
 - Emilio López Hernández A01651283
 - Luis German Ibarra Valerio A01176293
