@@ -5,9 +5,9 @@
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
-from yolo_opencv import get_objects_demo
-from plates_roi import get_license_plates_demo
-from ocr import extract_plate_text
+from yolov3.yolo_opencv import get_objects_demo
+from plates.plates_roi import get_license_plates_demo
+from plates.ocr import extract_plate_text
 import os
 
 def get_frame_objects(video_filename, sample_rate=1):
@@ -66,4 +66,7 @@ def get_frame_objects_demo(video_filename, sample_rate=1):
     out.release()
     out2.release()
 
-get_frame_objects_demo("raw_video/IMG_0112.MOV")
+import sys
+
+if len(sys.argv) > 1:
+    get_frame_objects_demo(sys.argv[1])

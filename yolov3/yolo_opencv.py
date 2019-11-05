@@ -1,3 +1,4 @@
+import os
 import cv2
 import numpy as np
 
@@ -176,6 +177,10 @@ def get_objects_demo(img, config="yolov3-tiny.cfg",
                 weights="yolov3-tiny.weights",
                 classes_="yolov3.txt"):
     image = img
+
+    config = os.path.join(os.path.dirname(__file__), config)
+    weights = os.path.join(os.path.dirname(__file__), weights)
+    classes_ = os.path.join(os.path.dirname(__file__), classes_)
 
     Width = image.shape[1]
     Height = image.shape[0]

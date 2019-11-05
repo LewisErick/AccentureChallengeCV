@@ -4,7 +4,6 @@
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
-from yolo_opencv import get_objects
 import os
 
 def apply_threshold_to_img(img, threshold_type="binary"):
