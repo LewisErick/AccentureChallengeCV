@@ -1,6 +1,11 @@
 # AccentureChallengeCV
 Recognition and validation of license plates and face of owners of a car with a subscription or membership to a parking lot.
 
+Emilio López Hernández A01651283
+Michelle Edwardo Sanchez Pineda A00819278
+Luis German Ibarra Valerio A01176293
+Luis Erick Zul Rabasa A00818663
+
 ## Usage instructions
 
 ### To extract plates and plate text from video:
