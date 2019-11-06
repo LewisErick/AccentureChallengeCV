@@ -16,11 +16,11 @@ def rotateImage(img):
     return img
 
 def adaptiveThreshold(img):
-    #gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+    blur = cv2.GaussianBlur(img,(5,5),0)
+    img = cv2.addWeighted(img, 3, blur, -1, 0)
+    _,img = cv2.threshold(img,175,255,cv2.THRESH_BINARY)
 
-    threshGauss = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 31, 7)
-
-    return threshGauss
+    return img
 
 def resize(img):
     ratio = 500.0 / img.shape[1]
@@ -58,8 +58,10 @@ def cleanOCR(image):
     config = '-l eng --oem 1 --psm 3'
     text = pytesseract.image_to_string(gray, config=config)
 
-    validChars = ['A', 'B', 'G', 'H', 'M', 'N', 'R', 'S',
-                    'T', 'U', 'V' 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    validChars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+                  'K', 'L', 'M', 'N', 'O', 'P', 'Q' 'R', 'S',
+                  'T', 'U', 'V' 'X', 'Y', 'Z',
+                  '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
     cleanText = []
 

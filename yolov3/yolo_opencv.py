@@ -172,28 +172,39 @@ def get_objects_video(vid, sample_rate=1, config="yolov3-tiny.cfg",
             frames.append(objects)
     return frames
 
+net_ = None
+
+def create_net(config="yolov3-tiny.cfg",
+                weights="yolov3-tiny.weights",
+                classes_="yolov3.txt"):
+    config = os.path.join(os.path.dirname(__file__), config)
+    weights = os.path.join(os.path.dirname(__file__), weights)
+
+    net = cv2.dnn.readNet(weights, config)
+
+    return net
 
 def get_objects_demo(img, config="yolov3-tiny.cfg",
                 weights="yolov3-tiny.weights",
                 classes_="yolov3.txt"):
     image = img
-
-    config = os.path.join(os.path.dirname(__file__), config)
-    weights = os.path.join(os.path.dirname(__file__), weights)
-    classes_ = os.path.join(os.path.dirname(__file__), classes_)
-
     Width = image.shape[1]
     Height = image.shape[0]
     scale = 0.00392
 
     classes = None
 
+    classes_ = os.path.join(os.path.dirname(__file__), classes_)
     with open(classes_, 'r') as f:
         classes = [line.strip() for line in f.readlines()]
 
     COLORS = np.random.uniform(0, 255, size=(len(classes), 3))
 
-    net = cv2.dnn.readNet(weights, config)
+    global net_
+    if net_ is None:
+        net_ = create_net(config, weights, classes_)
+
+    net = net_    
 
     blob = cv2.dnn.blobFromImage(image, scale, (416,416), (0,0,0), True, crop=False)
 

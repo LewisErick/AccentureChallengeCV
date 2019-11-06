@@ -1,6 +1,7 @@
 plates/raw_video/
 data/
 node_modules/
+raw_video/
 roi/raw_video
 roi/__pycache__/
 roi/*.jpg
