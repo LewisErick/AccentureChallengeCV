@@ -4,6 +4,7 @@ node_modules/
 raw_video/
 roi/raw_video
 roi/__pycache__/
+.vscode/
 roi/*.jpg
 .DS_Store
 *.ipynb_checkpoints*

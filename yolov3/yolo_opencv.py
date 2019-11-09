@@ -186,7 +186,7 @@ def create_net(config="yolov3-tiny.cfg",
 
 def get_objects_demo(img, config="yolov3-tiny.cfg",
                 weights="yolov3-tiny.weights",
-                classes_="yolov3.txt"):
+                classes_="yolov3.txt", obj_class=None):
     image = img
     Width = image.shape[1]
     Height = image.shape[0]
@@ -218,7 +218,6 @@ def get_objects_demo(img, config="yolov3-tiny.cfg",
     conf_threshold = 0.5
     nms_threshold = 0.4
 
-
     for out in outs:
         for detection in out:
             scores = detection[5:]
@@ -233,7 +232,8 @@ def get_objects_demo(img, config="yolov3-tiny.cfg",
                 y = center_y - h / 2
                 class_ids.append(class_id)
                 confidences.append(float(confidence))
-                boxes.append([x, y, w, h])
+                if obj_class is None or classes[class_id] == obj_class:
+                    boxes.append([x, y, w, h])
                 if (len(boxes) > 0):
                     break
         if (len(boxes) > 0):

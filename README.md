@@ -20,6 +20,9 @@ python platesvideo.py $VIDEO_PATH
 jupyter notebook
 ```
 
+## Demo Video
+[![Demo Video](http://img.youtube.com/vi/jF6bAHEhKfA/0.jpg)](http://www.youtube.com/watch?v=jF6bAHEhKfA)
+
 ## Technologies used
 ### Region of Interest (ROI)
 - YOLOv3 (with tiny weights)
